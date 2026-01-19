@@ -26,14 +26,11 @@ services:
   api:
     build:
       context: ../kickstarterserver
-    container_name: kickstarter-api
-    restart: unless-stopped
+      args:
+        DATABASE_URL: ${DATABASE_URL}
     environment:
-      # API listens on 3000 inside the container (based on your running setup)
+      DATABASE_URL: ${DATABASE_URL}
       PORT: 3000
-
-      # IMPORTANT: replace credentials/db name to match kickstarterdb/.env
-      DATABASE_URL: "postgresql://kickstarter:supersecretpassword@postgres:5432/kickstarter?schema=public"
     ports:
       - "8001:3000"
     depends_on:
